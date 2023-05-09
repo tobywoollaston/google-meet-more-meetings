@@ -1,0 +1,29 @@
+html {
+    width: 600px;
+    padding: 4px;
+}
+
+table {
+    background-color: white;
+    color: black;
+    width: 100%;
+}
+
+td {
+    padding: 8px 0;
+}
+
+table:hover {
+    background-color: #00254d;
+    color: white;
+}
+
+.container {
+  color: #314d3e;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}

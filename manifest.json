@@ -1,0 +1,51 @@
+{
+    "name": "GoogleMeet More Meetings",
+    "version": "0.1.0",
+    "description": "Showing more google meet meetings",
+    "key": "app_key",
+    "permissions": [
+        "identity", 
+        "storage", 
+        "tabs"
+    ],
+    "host_permissions": [
+        "https://meet.google.com/*",
+        "https://www.googleapis.com/oauth2/*"
+    ],
+    "oauth2": {
+        "client_id": "client_id",
+        "scopes": [
+            "https://www.googleapis.com/auth/calendar.readonly"
+        ]
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://meet.google.com/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/bookmark.png",
+          "assets/play.png",
+          "assets/delete.png",
+          "assets/save.png"
+        ],
+        "matches": ["https://meet.google.com/*"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "assets/ext-icon.png",
+        "24": "assets/ext-icon.png",
+        "32": "assets/ext-icon.png"
+      },
+      "default_title": "GoogleMeet More Meetings",
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
