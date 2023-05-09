@@ -3,7 +3,7 @@ import {
     getToken,
     getAllDayMeetings,
     getSlotMeetings,
-    getTimeFor
+    getDisplayTimeFor
 } from './common.js';
 
 async function removeAccount() {
@@ -17,7 +17,7 @@ function addEvents(events) {
 
     events.forEach(event => {
         let button = document.createElement('div')
-        let time = getTimeFor(event);
+        let time = getDisplayTimeFor(event);
     
         button.innerHTML = "<table><tr><td style=\"width:20%;\">" + time + "</td><td> " + event.name + "</td></tr></table>"
 
