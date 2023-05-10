@@ -3,22 +3,6 @@ html {
     padding: 4px;
 }
 
-table {
-    background-color: white;
-    color: black;
-    width: 100%;
-    border-bottom: 1px solid lightgrey;
-}
-
-td {
-    padding: 8px 0;
-}
-
-table:hover {
-    background-color: #00254d;
-    color: white;
-}
-
 .container {
   color: #314d3e;
 }

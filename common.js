@@ -1,6 +1,6 @@
-import { dateFormat } from './dateFormat.js';
+// import { dateFormat } from './dateFormat.js';
 
-export async function getToken() {
+async function getToken() {
     const auth = await chrome.identity.getAuthToken({ 'interactive': true });
     return auth.token;
 }
@@ -100,8 +100,8 @@ function convertedMeeting(meeting) {
     }
 }
 
-export async function getGoogleMeets() {
-    let authToken = await getToken();
+async function getGoogleMeets(token) {
+    let authToken = token ?? await getToken();
 
     let calendars = await getCalendars(authToken);
     let meetings = await getMeetingsWith(calendars, authToken);
@@ -109,8 +109,6 @@ export async function getGoogleMeets() {
     let filteredMeetings = []
     meetings.forEach(meeting => {
         if (isGoogleMeet(meeting) && isMeetingInFuture(meeting)) {
-            console.log(meeting);
-
             let converted = convertedMeeting(meeting);
             if (filteredMeetings.filter(x => x.meet == converted.meet).length == 0) {
                 filteredMeetings.push(convertedMeeting(meeting));
@@ -121,7 +119,7 @@ export async function getGoogleMeets() {
     return filteredMeetings;
 }
 
-export function getAllDayMeetings(meetings) {
+function getAllDayMeetings(meetings) {
     return meetings.filter(x => x.allDay);
 }
 
@@ -130,14 +128,15 @@ function getTime(date) {
     return new Date(newDateTime);
 }
 
-export function getSlotMeetings(meetings) {
+function getSlotMeetings(meetings) {
     return meetings.filter(x => !x.allDay).sort((a, b) => {
         return getTime(a.dateTime) - getTime(b.dateTime);
     });
 }
 
-export function getDisplayTimeFor(meeting) {
+function getDisplayTimeFor(meeting) {
     let dateTime = new Date(meeting.dateTime);
+    // return dateTime
     let time = meeting.allDay ? "All day" : dateFormat(dateTime, "h:MMTT");
     return time
 }

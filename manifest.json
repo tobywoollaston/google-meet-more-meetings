@@ -24,18 +24,11 @@
     "content_scripts": [
       {
         "matches": ["https://meet.google.com/*"],
-        "js": ["contentScript.js"]
-      }
-    ],
-    "web_accessible_resources": [
-      {
-        "resources": [
-          "assets/bookmark.png",
-          "assets/play.png",
-          "assets/delete.png",
-          "assets/save.png"
-        ],
-        "matches": ["https://meet.google.com/*"]
+        "js": [
+            "contentScript.js", 
+            "common.js",
+            "dateFormat.js"
+        ]
       }
     ],
     "action": {
