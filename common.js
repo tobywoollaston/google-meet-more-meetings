@@ -1,5 +1,3 @@
-// import { dateFormat } from './dateFormat.js';
-
 async function getToken() {
     const auth = await chrome.identity.getAuthToken({ 'interactive': true });
     return auth.token;
@@ -26,7 +24,7 @@ Date.prototype.addDays = function(days) {
 
 function getEndOfDay() {
     let endOfDay = new Date();
-    endOfDay = endOfDay.addDays(1);
+    // endOfDay = endOfDay.addDays(1);
     endOfDay.setHours(23);
     endOfDay.setMinutes(59);
     endOfDay.setSeconds(59);
@@ -136,7 +134,6 @@ function getSlotMeetings(meetings) {
 
 function getDisplayTimeFor(meeting) {
     let dateTime = new Date(meeting.dateTime);
-    // return dateTime
     let time = meeting.allDay ? "All day" : dateFormat(dateTime, "h:MMTT");
     return time
 }
