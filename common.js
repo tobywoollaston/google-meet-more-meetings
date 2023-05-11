@@ -94,7 +94,8 @@ function convertedMeeting(meeting) {
         meet: meeting.hangoutLink,
         dateTime: meeting.start.dateTime ?? meeting.start.date,
         name: meeting.summary,
-        allDay: meeting.start.date ? true : false
+        allDay: meeting.start.date ? true : false,
+        updatedDateTime: meeting.updated
     }
 }
 
@@ -108,13 +109,30 @@ async function getGoogleMeets(token) {
     meetings.forEach(meeting => {
         if (isGoogleMeet(meeting) && isMeetingInFuture(meeting)) {
             let converted = convertedMeeting(meeting);
-            if (filteredMeetings.filter(x => x.meet == converted.meet).length == 0) {
+            let sameMeetings = findSameMeetings(filteredMeetings, converted);
+
+            if (sameMeetings.length == 0) {
                 filteredMeetings.push(convertedMeeting(meeting));
+            } else if (shouldReplace(meeting, sameMeetings)) {
+                let index = filteredMeetings.findIndex(x => x == sameMeetings[0]); 
+                filteredMeetings[index] = converted;
             }
         }
     });
 
     return filteredMeetings;
+}
+
+function findSameMeetings(filteredMeetings, meeting) {
+    return filteredMeetings.filter(x => x.meet == meeting.meet);
+}
+
+function shouldReplace(meeting, sameMeetings) {
+    let existingMeeting = sameMeetings[0];
+    let existingUpdatedDate = new Date(existingMeeting.updatedDateTime);
+    let newMeetingUpdatedDate = new Date(meeting.updated);
+    
+    return newMeetingUpdatedDate > existingUpdatedDate
 }
 
 function getAllDayMeetings(meetings) {
