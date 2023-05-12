@@ -15,9 +15,9 @@
     const isMeetHomePage = () => {
         const newMeetingText = "New meeting";
         let buttons = Array.from(document.getElementsByTagName("button"));
-        let button = buttons.find((x) => x.innerHTML?.includes(newMeetingText));
+        let newMeetingButton = buttons.find(x => x.innerHTML?.includes(newMeetingText));
 
-        if (button) {
+        if (newMeetingButton) {
             return true;
         } else {
             return false;
@@ -28,7 +28,7 @@
         meetingsDiv.style.width = "100%";
         meetingsDiv.style.borderCollapse = "collapse";
 
-        meetings.forEach((meet) => {
+        meetings.forEach(meet => {
             let meetingRow = document.createElement("tr");
             meetingRow.setAttribute("role", "button");
             meetingRow.style.height = "65px";
@@ -56,15 +56,9 @@
         });
     };
 
-    const addMeetings = async (token) => {
+    const addMeetings = async token => {
         const xpath = "//div[contains(text(), 'From your Google Calendar')]";
-        const sibling = document.evaluate(
-            xpath,
-            document,
-            null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE,
-            null
-        ).singleNodeValue;
+        const sibling = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
         const meetingsBlock = sibling.previousSibling; //document.getElementsByClassName("VdLOD yUoCvf JxfZTd")[0];
         meetingsBlock.innerHTML = "";
@@ -81,8 +75,7 @@
         meetingTable.firstChild.style.borderTop = "none";
         meetingTable.lastChild.style.borderBottom = "none";
 
-        var css =
-            "table tr:hover { background-color: rgb(26,115,232); color: white !important; }";
+        var css = "table tr:hover { background-color: rgb(26,115,232); color: white !important; }";
         let style = document.createElement("style");
         style.appendChild(document.createTextNode(css));
         meetingTable.appendChild(style);
