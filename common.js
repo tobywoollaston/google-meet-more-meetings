@@ -146,9 +146,7 @@ function getTime(date) {
 function getSlotMeetings(meetings) {
     return meetings
         .filter(x => !x.allDay)
-        .sort((a, b) => {
-            return getTime(a.dateTime) - getTime(b.dateTime);
-        });
+        .sort((a, b) => getTime(a.dateTime) - getTime(b.dateTime));
 }
 
 function getDisplayTimeFor(meeting) {
