@@ -70,17 +70,34 @@ Date.prototype.dateEquals = function(date) {
     return this.getYear() == date.getYear() && this.getMonth() == date.getMonth() && this.getDate() == date.getDate();
 };
 
+Date.prototype.timeGreater = function(date) {
+    return this.getHours() >= date.getHours() && this.getMinutes() >= date.getMinutes();
+};
+
 function isMeetingInFuture(meeting) {
-    let endDateTime = new Date(meeting.end.dateTime ?? meeting.end.date);
+    if (meeting.summary === "BrightHR pairing room 3") {
+        console.log("start")
+    }
+    console.log(meeting)
+    let endDateTime = new Date(meeting.end?.dateTime ?? meeting.end.date);
+    console.log(endDateTime)
     let currentDateTime = new Date();
+    console.log(currentDateTime)
 
-    let startDate = new Date(meeting.start.dateTime);
+    let startDate = new Date(meeting.start.dateTime ?? meeting.start.date);
+    console.log(startDate)
 
-    if (endDateTime.getTime() > currentDateTime.getTime()) {
+    console.log('checking if meeting is in future')
+    console.log(endDateTime.getHours(), ':', endDateTime.getMinutes())
+    console.log(currentDateTime.getHours(), ':', currentDateTime.getMinutes())
+    if (currentDateTime.timeGreater(endDateTime)) {
+        console.log('meeting is in future')
         return true;
     }
 
+    console.log('checking if meeting is in reoccuring')
     if (meeting.recurrence && startDate.dateEquals(endDateTime) && endDateTime.getTime() < currentDateTime.getTime()) {
+        console.log('meeting is reoccuring')
         return true;
     }
 
@@ -106,12 +123,14 @@ async function getGoogleMeets(token) {
 
     let filteredMeetings = [];
     meetings.forEach(meeting => {
+        // console.log(meeting);
+        // console.log(isMeetingInFuture(meeting));
         if (isGoogleMeet(meeting) && isMeetingInFuture(meeting)) {
             let converted = convertedMeeting(meeting);
             let sameMeetings = findSameMeetings(filteredMeetings, converted);
 
             if (sameMeetings.length == 0) {
-                filteredMeetings.push(convertedMeeting(meeting));
+                filteredMeetings.push(convertedMeeting(meeting)); 
             } else if (shouldReplace(meeting, sameMeetings)) {
                 let index = filteredMeetings.findIndex(x => x == sameMeetings[0]);
                 filteredMeetings[index] = converted;
