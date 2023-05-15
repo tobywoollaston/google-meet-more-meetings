@@ -21,7 +21,6 @@ const displayMeetings = (meetings, meetingsDiv) => {
         let dateColumn = document.createElement("td");
         dateColumn.innerHTML = getDisplayTimeFor(meet);
         dateColumn.style.width = "112px";
-        dateColumn.style.color = "rgba(32,33,36,.67)";
         dateColumn.style.fontSize = "13px";
         dateColumn.style.textAlign = "center";
 

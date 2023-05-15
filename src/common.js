@@ -130,7 +130,7 @@ async function getGoogleMeets(token) {
             let sameMeetings = findSameMeetings(filteredMeetings, converted);
 
             if (sameMeetings.length == 0) {
-                filteredMeetings.push(convertedMeeting(meeting)); 
+                filteredMeetings.push(convertedMeeting(meeting));
             } else if (shouldReplace(meeting, sameMeetings)) {
                 let index = filteredMeetings.findIndex(x => x == sameMeetings[0]);
                 filteredMeetings[index] = converted;
