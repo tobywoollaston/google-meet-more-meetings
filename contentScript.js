@@ -35,14 +35,11 @@
             meetingRow.style.borderStyle = "solid";
             meetingRow.style.borderWidth = "1px 0";
             meetingRow.style.borderColor = "rgba(32,33,36,.2)";
-            meetingRow.addEventListener("click", () => {
-                window.location.replace(meet.meet);
-            });
+            meetingRow.addEventListener("click", () => window.location.href = meet.meet);
 
             let dateColumn = document.createElement("td");
             dateColumn.innerHTML = getDisplayTimeFor(meet);
             dateColumn.style.width = "112px";
-            dateColumn.style.color = "rgba(32,33,36,.67)";
             dateColumn.style.fontSize = "16px";
 
             let nameColumn = document.createElement("td");
