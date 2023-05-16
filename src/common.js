@@ -24,7 +24,7 @@ Date.prototype.addDays = function(days) {
 
 function getEndOfDay() {
     let endOfDay = new Date();
-    // endOfDay = endOfDay.addDays(1);
+    endOfDay = endOfDay.addDays(1);
     endOfDay.setHours(23);
     endOfDay.setMinutes(59);
     endOfDay.setSeconds(59);
