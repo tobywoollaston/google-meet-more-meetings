@@ -71,7 +71,10 @@ Date.prototype.dateEquals = function(date) {
 };
 
 Date.prototype.timeGreater = function(date) {
-    return this.getHours() >= date.getHours() && this.getMinutes() >= date.getMinutes();
+    if (this.getUTCHours() == date.getUTCHours()) {
+        return this.getUTCMinutes() >= date.getUTCMinutes()
+    }
+    return this.getUTCHours() <= date.getUTCHours();
 };
 
 function isMeetingInFuture(meeting) {
@@ -88,15 +91,19 @@ function isMeetingInFuture(meeting) {
     console.log(startDate)
 
     console.log('checking if meeting is in future')
-    console.log(endDateTime.getHours(), ':', endDateTime.getMinutes())
-    console.log(currentDateTime.getHours(), ':', currentDateTime.getMinutes())
+    console.log(endDateTime.getUTCHours(), ':', endDateTime.getUTCMinutes())
+    console.log(currentDateTime.getUTCHours(), ':', currentDateTime.getUTCMinutes())
+    console.log(currentDateTime.getUTCHours() <= endDateTime.getUTCHours(), ':', currentDateTime.getUTCMinutes() >= endDateTime.getUTCMinutes())
     if (currentDateTime.timeGreater(endDateTime)) {
         console.log('meeting is in future')
         return true;
     }
 
     console.log('checking if meeting is in reoccuring')
-    if (meeting.recurrence && startDate.dateEquals(endDateTime) && endDateTime.getTime() < currentDateTime.getTime()) {
+    console.log(meeting.recurrence)
+    console.log(startDate.getTime() < currentDateTime.getTime())
+    console.log(endDateTime.getTime() < currentDateTime.getTime())
+    if (meeting.recurrence && startDate.getTime() < currentDateTime.getTime() && endDateTime.getTime() < currentDateTime.getTime()) {
         console.log('meeting is reoccuring')
         return true;
     }
