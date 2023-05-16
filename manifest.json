@@ -19,16 +19,16 @@
         ]
     },
     "background": {
-      "service_worker": "src/page/background.js"
+      "service_worker": "src/page/background.js",
+      "type": "module"
     },
     "content_scripts": [
       {
         "matches": ["https://meet.google.com/*"],
         "js": [
-            "src/page/contentScript.js", 
-            "src/common.js",
-            "src/dateFormat.js"
-        ]
+            "src/page/contentScript.js"
+        ],
+        "type": "module"
       }
     ],
     "action": {

@@ -1,6 +1,9 @@
 import { expect, test } from 'vitest';
-import '../src/common';
+// import { convertedMeeting } from '../src/commonNew'
 import { oneOffMeeting } from './data';
+
+let common = require('../src/commonNew');
+console.log(common);
 
 test('convert one off meeting', () => {
     let expected = {
@@ -12,5 +15,5 @@ test('convert one off meeting', () => {
         updatedDateTime: oneOffMeeting.updated,
     }
 
-    expect(convertedMeeting(oneOffMeeting)).toBe(expected);
+    expect(common.convertedMeeting(oneOffMeeting)).toBe(expected);
 })
