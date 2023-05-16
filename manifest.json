@@ -3,42 +3,39 @@
     "version": "0.1.0",
     "description": "Showing more google meet meetings",
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq0ncA8VrF/uX5yMnHvhAlBjPRalm6mLeDauE6hbh3UJTHyaln6O0qWbHUFq4a+3HWEiHbwZmJXHAaSPa2/ciO/qj2RrKCqd4uns9lfCQC3vSPRwxp/Yt5b5Brv3ksejV90LooR09nI15GbSdYpKYHZ2PeVrhsn6Y6o9paGTGOyHRnGA3TlwVY8tJ2SfWPjrIe8urLypjBgfwicuLoIUb9KJe+WZYx3+uMbTDHagUxxsFPkUeNrNt5Uz8kBTEHMCNODMsn9b5gJJXSd6jzth8C9Pd8QmP+VEu5KOnfSRE4H8D2Zsq4YWCz+2m7pv0xDRR9hCK1Yikq3GuduNqoac40QIDAQAB",
-    "permissions": [
-        "identity", 
-        "storage", 
-        "tabs"
-    ],
-    "host_permissions": [
-        "https://meet.google.com/*",
-        "https://www.googleapis.com/oauth2/*"
-    ],
+    "permissions": ["identity", "storage", "tabs"],
+    "host_permissions": ["https://meet.google.com/*", "https://www.googleapis.com/oauth2/*"],
     "oauth2": {
         "client_id": "1048001560168-t1sik8s4qjtt94qvh01oqk4otlv4qolf.apps.googleusercontent.com",
-        "scopes": [
-            "https://www.googleapis.com/auth/calendar.readonly"
-        ]
+        "scopes": ["https://www.googleapis.com/auth/calendar.readonly"]
     },
     "background": {
-      "service_worker": "src/page/background.js",
-      "type": "module"
+        "service_worker": "src/page/background.js",
+        "type": "module"
     },
     "content_scripts": [
-      {
-        "matches": ["https://meet.google.com/*"],
-        "js": [
-            "src/page/contentScript.js"
-        ],
-        "type": "module"
-      }
+        {
+            "matches": ["https://meet.google.com/*"],
+            "js": ["src/page/content.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/page/main.js",
+                "src/common.js"
+            ],
+            "matches": ["https://meet.google.com/*"]
+        }
     ],
     "action": {
-      "default_icon": {
-        "16": "assets/ext-icon.png",
-        "24": "assets/ext-icon.png",
-        "32": "assets/ext-icon.png"
-      },
-      "default_title": "GoogleMeet More Meetings",
-      "default_popup": "src/popup/popup.html"
+        "default_icon": {
+            "16": "assets/ext-icon.png",
+            "24": "assets/ext-icon.png",
+            "32": "assets/ext-icon.png"
+        },
+        "default_title": "GoogleMeet More Meetings",
+        "default_popup": "src/popup/popup.html"
     },
     "manifest_version": 3
 }

@@ -122,7 +122,7 @@ function convertedMeeting(meeting) {
     };
 }
 
-async function getGoogleMeets(token) {
+export async function getGoogleMeets(token) {
     let authToken = token ?? (await getToken());
 
     let calendars = await getCalendars(authToken);
@@ -160,7 +160,7 @@ function shouldReplace(meeting, sameMeetings) {
     return newMeetingUpdatedDate > existingUpdatedDate;
 }
 
-function getAllDayMeetings(meetings) {
+export function getAllDayMeetings(meetings) {
     return meetings.filter(x => x.allDay);
 }
 
@@ -169,13 +169,13 @@ function getTime(date) {
     return new Date(newDateTime);
 }
 
-function getSlotMeetings(meetings) {
+export function getSlotMeetings(meetings) {
     return meetings
         .filter(x => !x.allDay)
         .sort((a, b) => getTime(a.dateTime) - getTime(b.dateTime));
 }
 
-function getDisplayTimeFor(meeting) {
+export function getDisplayTimeFor(meeting) {
     let dateTime = new Date(meeting.dateTime);
     let time = meeting.allDay ? "All day" : dateFormat(dateTime, "h:MMTT");
     return time;
