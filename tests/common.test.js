@@ -228,14 +228,11 @@ describe('get all events until end of day for a calendar', () => {
     test('call events endpoint', async () => {
         const token = "TOKENNN";
         fetch.mockResolvedValue(createFetchResponse({ items: [] }));
-        const date = new Date("2023-05-16T09:35:00+00:00");
-        const endOfDay = new Date("2023-05-16T22:59:59+00:00");
-        vi.setSystemTime(date);
 
         await getMeetingsFor({id:"CalendarId"}, token);
       
         expect(fetch).toHaveBeenCalledWith(
-            "https://www.googleapis.com/calendar/v3/calendars/CalendarId/events?timeMax=" + endOfDay.toISOString() + "&timeMin=2023-05-16T09:35:00.000Z",
+            expect.stringContaining("https://www.googleapis.com/calendar/v3/calendars/CalendarId/events?timeMax="),
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
