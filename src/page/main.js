@@ -5,8 +5,6 @@ import {
     getDisplayTimeFor
  } from '../common.js';
 
-console.log('main injected');
-
 window.addEventListener("message", ({ data })=>{
     if (data.type === 'token') {
         addMeetings(data.token);
