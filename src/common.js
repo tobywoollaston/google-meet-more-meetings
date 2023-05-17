@@ -1,3 +1,5 @@
+import { dateFormat } from "./dateFormat";
+
 async function getToken() {
     const auth = await chrome.identity.getAuthToken({ interactive: true });
     return auth.token;
@@ -111,7 +113,7 @@ function isMeetingInFuture(meeting) {
     return false;
 }
 
-function convertedMeeting(meeting) {
+export function convertedMeeting(meeting) {
     return {
         id: meeting.id,
         meet: meeting.hangoutLink,
