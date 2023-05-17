@@ -23,7 +23,8 @@
         {
             "resources": [
                 "src/page/main.js",
-                "src/common.js"
+                "src/common.js",
+                "src/dateFormat.js"
             ],
             "matches": ["https://meet.google.com/*"]
         }
