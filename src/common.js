@@ -1,4 +1,4 @@
-import { dateFormat } from "./dateFormat";
+import { dateFormat } from "./dateFormat.js";
 
 async function getToken() {
     const auth = await chrome.identity.getAuthToken({ interactive: true });
