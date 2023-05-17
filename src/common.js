@@ -45,6 +45,9 @@ async function getMeetingsFor(calendar, authToken) {
             Authorization: "Bearer " + authToken,
             Accept: "application/json",
         },
+    }).catch(() => {
+        console.log('404')
+        return;
     });
     let response = await data.json();
     return response.items;
@@ -79,34 +82,23 @@ Date.prototype.timeGreater = function(date) {
     return this.getUTCHours() <= date.getUTCHours();
 };
 
-function isMeetingInFuture(meeting) {
-    if (meeting.summary === "BrightHR pairing room 3") {
-        console.log("start")
-    }
-    console.log(meeting)
+export function isMeetingInFuture(meeting) {
+    let startDateTime = new Date(meeting.start.dateTime ?? meeting.start.date);
     let endDateTime = new Date(meeting.end?.dateTime ?? meeting.end.date);
-    console.log(endDateTime)
     let currentDateTime = new Date();
-    console.log(currentDateTime)
 
-    let startDate = new Date(meeting.start.dateTime ?? meeting.start.date);
-    console.log(startDate)
+    if (meeting.summary?.includes('room 1')) {
+        console.log(meeting);
+    }
 
-    console.log('checking if meeting is in future')
-    console.log(endDateTime.getUTCHours(), ':', endDateTime.getUTCMinutes())
-    console.log(currentDateTime.getUTCHours(), ':', currentDateTime.getUTCMinutes())
-    console.log(currentDateTime.getUTCHours() <= endDateTime.getUTCHours(), ':', currentDateTime.getUTCMinutes() >= endDateTime.getUTCMinutes())
     if (currentDateTime.timeGreater(endDateTime)) {
-        console.log('meeting is in future')
         return true;
     }
 
-    console.log('checking if meeting is in reoccuring')
-    console.log(meeting.recurrence)
-    console.log(startDate.getTime() < currentDateTime.getTime())
-    console.log(endDateTime.getTime() < currentDateTime.getTime())
-    if (meeting.recurrence && startDate.getTime() < currentDateTime.getTime() && endDateTime.getTime() < currentDateTime.getTime()) {
-        console.log('meeting is reoccuring')
+    if (meeting.end.date && 
+        meeting.recurrence && 
+        startDateTime.getTime() < currentDateTime.getTime() && 
+        endDateTime.getTime() < currentDateTime.getTime()) {
         return true;
     }
 
