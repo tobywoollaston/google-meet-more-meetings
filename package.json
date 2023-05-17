@@ -1,0 +1,24 @@
+{
+  "name": "google-meet-more-meetings",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobywoollaston/google-meet-more-meetings.git"
+  },
+  "author": "tobywoollaston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tobywoollaston/google-meet-more-meetings/issues"
+  },
+  "homepage": "https://github.com/tobywoollaston/google-meet-more-meetings#readme",
+  "devDependencies": {
+    "vitest": "^0.31.0"
+  }
+}
