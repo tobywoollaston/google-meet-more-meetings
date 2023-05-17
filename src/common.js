@@ -5,7 +5,7 @@ async function getToken() {
     return auth.token;
 }
 
-async function getCalendars(authToken) {
+export async function getCalendars(authToken) {
     let data = await fetch("https://www.googleapis.com/calendar/v3/users/me/calendarList", {
         headers: {
             Authorization: "Bearer " + authToken,
@@ -24,7 +24,7 @@ Date.prototype.addDays = function(days) {
     return date;
 };
 
-function getEndOfDay() {
+export function getEndOfDay() {
     let endOfDay = new Date();
     // endOfDay = endOfDay.addDays(1);
     endOfDay.setHours(23);
@@ -33,7 +33,7 @@ function getEndOfDay() {
     return endOfDay;
 }
 
-async function getMeetingsFor(calendar, authToken) {
+export async function getMeetingsFor(calendar, authToken) {
     let currentDateTime = new Date().toISOString();
     let endOfDayDateTime = getEndOfDay().toISOString();
 
@@ -45,9 +45,6 @@ async function getMeetingsFor(calendar, authToken) {
             Authorization: "Bearer " + authToken,
             Accept: "application/json",
         },
-    }).catch(() => {
-        console.log('404')
-        return;
     });
     let response = await data.json();
     return response.items;
@@ -67,7 +64,7 @@ async function getMeetingsWith(calendars, authToken) {
     return allMeetings;
 }
 
-function isGoogleMeet(meeting) {
+export function isGoogleMeet(meeting) {
     return meeting.hangoutLink ? true : false;
 }
 
@@ -120,8 +117,6 @@ export async function getGoogleMeets(token) {
 
     let filteredMeetings = [];
     meetings.forEach(meeting => {
-        // console.log(meeting);
-        // console.log(isMeetingInFuture(meeting));
         if (isGoogleMeet(meeting) && isMeetingInFuture(meeting)) {
             let converted = convertedMeeting(meeting);
             let sameMeetings = findSameMeetings(filteredMeetings, converted);
@@ -142,7 +137,7 @@ function findSameMeetings(filteredMeetings, meeting) {
     return filteredMeetings.filter(x => x.meet == meeting.meet);
 }
 
-function shouldReplace(meeting, sameMeetings) {
+export function shouldReplace(meeting, sameMeetings) {
     let existingMeeting = sameMeetings[0];
     let existingUpdatedDate = new Date(existingMeeting.updatedDateTime);
     let newMeetingUpdatedDate = new Date(meeting.updated);

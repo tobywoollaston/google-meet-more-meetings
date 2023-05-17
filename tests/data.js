@@ -60,3 +60,46 @@ export const oneOffMeeting = {
     },
     "eventType": "default"
 }
+
+export const notGoogleMeetMeeting = {
+    "kind": "calendar#event",
+    "etag": "\"3329237294827000\"",
+    "id": "_6kpjigpk69234b9g6cqk2b9k70p32ba18kr4aba48or34gho70rjeh9h64",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=XzZrcGppZ3BrNjkyMzRiOWc2Y3FrMmI5azcwcDMyYmExOGtyNGFiYTQ4b3IzNGdobzcwcmplaDloNjRfMjAyMjA4MjVUMTEwMDAwWiB0b2JpYXMud29vbGxhc3RvbkBjb2R1cmFuY2UuY29t",
+    "created": "2022-08-25T08:17:10.000Z",
+    "updated": "2022-11-07T11:51:04.055Z",
+    "summary": "Lunch",
+    "description": "This <a href=\"https://support.getclockwise.com/hc/en-us/articles/360027033951-Lunch-Smart-Holds?utm_medium=referral&utm_source=gcal-event-desc&utm_campaign=lunch-helpcenter\">Lunch event</a> is automatically managed by <a href=\"https://www.getclockwise.com/?utm_medium=referral&utm_source=gcal-event-desc&utm_campaign=lunch-clockwise\">Clockwise</a>. The timing and duration of this event may update as your schedule changes.\n\nIf you edit and save this event, your edits will save and Clockwise will no longer update the timing of the event.\n\n⚙ Visit your <a href=\"https://www.getclockwise.com/app/settings/smartholds?utm_medium=referral&utm_source=gcal-event-desc&utm_campaign=lunch-settings\">Clockwise Settings</a> to customize or turn off Lunch events.",
+    "creator": {
+        "email": "tobias.woollaston@codurance.com",
+        "self": true
+    },
+    "organizer": {
+        "email": "tobias.woollaston@codurance.com",
+        "self": true
+    },
+    "start": {
+        "dateTime": "2022-08-25T12:00:00+01:00",
+        "timeZone": "Europe/London"
+    },
+    "end": {
+        "dateTime": "2022-08-25T13:00:00+01:00",
+        "timeZone": "Europe/London"
+    },
+    "recurrence": [
+        "RRULE:FREQ=WEEKLY;BYDAY=FR,MO,TH,TU,WE"
+    ],
+    "iCalUID": "539C42D2-035A-4821-AE6E-DF62B8877E11",
+    "sequence": 1,
+    "reminders": {
+        "useDefault": false,
+        "overrides": [
+            {
+                "method": "popup",
+                "minutes": 10
+            }
+        ]
+    },
+    "eventType": "default"
+}
