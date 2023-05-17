@@ -228,7 +228,7 @@ describe('get all events until end of day for a calendar', () => {
     test('call events endpoint', async () => {
         const token = "TOKENNN";
         fetch.mockResolvedValue(createFetchResponse({ items: [] }));
-        const date = new Date("2023-05-16T09:35:00+01:00");
+        const date = new Date("2023-05-16T09:35:00");
         vi.setSystemTime(date);
 
         await getMeetingsFor({id:"CalendarId"}, token);
