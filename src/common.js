@@ -1,54 +1,5 @@
-import { dateFormat } from "./dateFormat.js";
-
-async function getToken() {
-    const auth = await chrome.identity.getAuthToken({ interactive: true });
-    return auth.token;
-}
-
-export async function getCalendars(authToken) {
-    let data = await fetch("https://www.googleapis.com/calendar/v3/users/me/calendarList", {
-        headers: {
-            Authorization: "Bearer " + authToken,
-            Accept: "application/json",
-        },
-    });
-    let response = await data.json();
-    return response.items.map(x => {
-        return { id: x.id, name: x.summary };
-    });
-}
-
-Date.prototype.addDays = function(days) {
-    var date = new Date(this.valueOf());
-    date.setDate(date.getDate() + days);
-    return date;
-};
-
-export function getEndOfDay() {
-    let endOfDay = new Date();
-    // endOfDay = endOfDay.addDays(1);
-    endOfDay.setHours(23);
-    endOfDay.setMinutes(59);
-    endOfDay.setSeconds(59);
-    return endOfDay;
-}
-
-export async function getMeetingsFor(calendar, authToken) {
-    let currentDateTime = new Date().toISOString();
-    let endOfDayDateTime = getEndOfDay().toISOString();
-
-    let url = "https://www.googleapis.com/calendar/v3/calendars/" + encodeURI(calendar.id) + "/events";
-    url += "?timeMax=" + endOfDayDateTime + "&timeMin=" + currentDateTime;
-
-    let data = await fetch(url, {
-        headers: {
-            Authorization: "Bearer " + authToken,
-            Accept: "application/json",
-        },
-    });
-    let response = await data.json();
-    return response.items;
-}
+import { getToken, getCalendars, getMeetingsFor } from "./googleApi.js";
+import { getTime } from "./dateHelpers.js";
 
 async function getMeetingsWith(calendars, authToken) {
     let allMeetings = [];
@@ -60,24 +11,12 @@ async function getMeetingsWith(calendars, authToken) {
             }
         })
     );
-
     return allMeetings;
 }
 
 export function isGoogleMeet(meeting) {
     return meeting.hangoutLink ? true : false;
 }
-
-Date.prototype.dateEquals = function(date) {
-    return this.getYear() == date.getYear() && this.getMonth() == date.getMonth() && this.getDate() == date.getDate();
-};
-
-Date.prototype.timeGreater = function(date) {
-    if (this.getUTCHours() == date.getUTCHours()) {
-        return this.getUTCMinutes() <= date.getUTCMinutes()
-    }
-    return this.getUTCHours() <= date.getUTCHours();
-};
 
 export function isMeetingInFuture(meeting) {
     let startDateTime = new Date(meeting.start.dateTime ?? meeting.start.date);
@@ -88,10 +27,12 @@ export function isMeetingInFuture(meeting) {
         return true;
     }
 
-    if (meeting.end.date && 
-        meeting.recurrence && 
-        startDateTime.getTime() < currentDateTime.getTime() && 
-        endDateTime.getTime() < currentDateTime.getTime()) {
+    if (
+        meeting.end.date &&
+        meeting.recurrence &&
+        startDateTime.getTime() < currentDateTime.getTime() &&
+        endDateTime.getTime() < currentDateTime.getTime()
+    ) {
         return true;
     }
 
@@ -149,19 +90,6 @@ export function getAllDayMeetings(meetings) {
     return meetings.filter(x => x.allDay);
 }
 
-function getTime(date) {
-    let newDateTime = "2000-01-01T" + dateFormat(date, "HH:MM:ss");
-    return new Date(newDateTime);
-}
-
 export function getSlotMeetings(meetings) {
-    return meetings
-        .filter(x => !x.allDay)
-        .sort((a, b) => getTime(a.dateTime) - getTime(b.dateTime));
-}
-
-export function getDisplayTimeFor(meeting) {
-    let dateTime = new Date(meeting.dateTime);
-    let time = meeting.allDay ? "All day" : dateFormat(dateTime, "h:MMTT");
-    return time;
+    return meetings.filter(x => !x.allDay).sort((a, b) => getTime(a.dateTime) - getTime(b.dateTime));
 }

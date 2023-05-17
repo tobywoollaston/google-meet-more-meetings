@@ -1,18 +1,14 @@
-import { 
-    getGoogleMeets,
-    getAllDayMeetings,
-    getSlotMeetings,
-    getDisplayTimeFor
- } from '../common.js';
+import { getGoogleMeets, getAllDayMeetings, getSlotMeetings } from "../common.js";
+import { getDisplayTimeFor } from "../dateHelpers.js";
 
-window.addEventListener("message", ({ data })=>{
-    if (data.type === 'token') {
+window.addEventListener("message", ({ data }) => {
+    if (data.type === "token") {
         addMeetings(data.token);
     }
 });
 
 const escapeHTMLPolicy = trustedTypes.createPolicy("myEscapePolicy", {
-    createHTML: (string) => string.replace(/>/g, "<"),
+    createHTML: string => string.replace(/>/g, "<"),
 });
 
 const displayMeetings = (meetings, meetingsDiv) => {
@@ -49,13 +45,15 @@ const addMeetings = async token => {
     const sibling = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
     const meetingsBlock = sibling.previousSibling; //document.getElementsByClassName("VdLOD yUoCvf JxfZTd")[0];
-    meetingsBlock.innerHTML = escapeHTMLPolicy.createHTML("");
-    let meetingTable = document.createElement("table");
-    meetingsBlock.appendChild(meetingTable);
+    meetingsBlock.innerHTML = escapeHTMLPolicy.createHTML("Loading");
 
     let meetings = await getGoogleMeets(token);
     let allDayEvents = getAllDayMeetings(meetings);
     let timedEvents = getSlotMeetings(meetings);
+
+    meetingsBlock.innerHTML = escapeHTMLPolicy.createHTML("");
+    let meetingTable = document.createElement("table");
+    meetingsBlock.appendChild(meetingTable);
 
     displayMeetings(allDayEvents, meetingTable);
     displayMeetings(timedEvents, meetingTable);

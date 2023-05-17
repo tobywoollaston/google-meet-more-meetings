@@ -24,7 +24,9 @@
             "resources": [
                 "src/page/main.js",
                 "src/common.js",
-                "src/dateFormat.js"
+                "src/dateFormat.js",
+                "src/dateHelpers.js",
+                "src/googleApi.js"
             ],
             "matches": ["https://meet.google.com/*"]
         }

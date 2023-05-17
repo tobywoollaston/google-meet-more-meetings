@@ -1,10 +1,6 @@
-import { 
-    getGoogleMeets,
-    getAllDayMeetings,
-    getSlotMeetings,
-    getDisplayTimeFor,
-} from '../common.js';
-import '../dateFormat.js';
+import { getGoogleMeets, getAllDayMeetings, getSlotMeetings } from "../common.js";
+import "../dateFormat.js";
+import { getDisplayTimeFor } from "../dateHelpers.js";
 
 async function removeAccount() {
     let token = await getToken();
