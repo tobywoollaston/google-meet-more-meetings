@@ -8,11 +8,11 @@ export const oneOffMeeting = {
     "updated": "2023-05-15T22:04:09.049Z",
     "summary": "One off meeting",
     "creator": {
-        "email": "tobias.woollaston@codurance.com",
+        "email": "tobywoollaston@hotmail.co.uk",
         "self": true
     },
     "organizer": {
-        "email": "tobias.woollaston@codurance.com",
+        "email": "tobywoollaston@hotmail.co.uk",
         "self": true
     },
     "start": {
@@ -23,7 +23,7 @@ export const oneOffMeeting = {
         "dateTime": "2023-05-16T11:00:00+01:00",
         "timeZone": "Europe/London"
     },
-    "iCalUID": "6ccctadc2icul7dtagtvubj343@google.com",
+    "iCalUID": "6c654adc2icul7dtagtvubj343@google.com",
     "sequence": 0,
     "hangoutLink": "https://meet.google.com/oti-cyhb-cga",
     "conferenceData": {
@@ -70,13 +70,13 @@ export const notGoogleMeetMeeting = {
     "created": "2022-08-25T08:17:10.000Z",
     "updated": "2022-11-07T11:51:04.055Z",
     "summary": "Lunch",
-    "description": "This <a href=\"https://support.getclockwise.com/hc/en-us/articles/360027033951-Lunch-Smart-Holds?utm_medium=referral&utm_source=gcal-event-desc&utm_campaign=lunch-helpcenter\">Lunch event</a> is automatically managed by <a href=\"https://www.getclockwise.com/?utm_medium=referral&utm_source=gcal-event-desc&utm_campaign=lunch-clockwise\">Clockwise</a>. The timing and duration of this event may update as your schedule changes.\n\nIf you edit and save this event, your edits will save and Clockwise will no longer update the timing of the event.\n\n⚙ Visit your <a href=\"https://www.getclockwise.com/app/settings/smartholds?utm_medium=referral&utm_source=gcal-event-desc&utm_campaign=lunch-settings\">Clockwise Settings</a> to customize or turn off Lunch events.",
+    "description": "",
     "creator": {
-        "email": "tobias.woollaston@codurance.com",
+        "email": "tobywoollaston@hotmail.co.uk",
         "self": true
     },
     "organizer": {
-        "email": "tobias.woollaston@codurance.com",
+        "email": "tobywoollaston@hotmail.co.uk",
         "self": true
     },
     "start": {
@@ -90,7 +90,7 @@ export const notGoogleMeetMeeting = {
     "recurrence": [
         "RRULE:FREQ=WEEKLY;BYDAY=FR,MO,TH,TU,WE"
     ],
-    "iCalUID": "539C42D2-035A-4821-AE6E-DF62B8877E11",
+    "iCalUID": "45312-035A-4821-AE6E-DF62B8877E11",
     "sequence": 1,
     "reminders": {
         "useDefault": false,
