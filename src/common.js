@@ -87,10 +87,6 @@ export function isMeetingInFuture(meeting) {
     let endDateTime = new Date(meeting.end?.dateTime ?? meeting.end.date);
     let currentDateTime = new Date();
 
-    if (meeting.summary?.includes('room 1')) {
-        console.log(meeting);
-    }
-
     if (currentDateTime.timeGreater(endDateTime)) {
         return true;
     }
