@@ -177,7 +177,7 @@ describe('get display time for meeting', () => {
     test('meeting start time', () => {
         let expected = "2:30PM";
 
-        const result = getDisplayTimeFor({ dateTime: "2023-04-03T14:30:00+01:00", allDay: false });
+        const result = getDisplayTimeFor({ dateTime: "2023-04-03T14:30:00", allDay: false });
 
         expect(result).toEqual(expected);
     });
